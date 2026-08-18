@@ -79,8 +79,13 @@
   }
   .panel.issue { border-top: 4px solid var(--orange); }
   .panel.solution { border-top: 4px solid var(--gold); }
-  .panel p { margin: 0; font-size: clamp(17px, 1.9vw, 20px); line-height: 1.45; color: var(--on-navy); }
-  .panel.solution p { color: #fff; font-weight: 500; }
+  .panel p { margin: 0; }
+  .panel .scenario { font-size: 16px; line-height: 1.5; color: var(--on-navy); }
+  .panel .lead {
+    font-family: var(--font-display); font-size: clamp(19px, 2.2vw, 23px);
+    font-weight: 600; line-height: 1.28; letter-spacing: -.014em; color: #fff;
+  }
+  .panel .support { font-size: 14px; line-height: 1.5; color: var(--on-navy-soft); }
 
   /* ---------- sections ---------- */
   section { display: flex; flex-direction: column; gap: 18px; }
@@ -105,6 +110,9 @@
   .s-sub   { font-family: var(--font-body); font-size: 11.5px; font-weight: 400; fill: var(--on-navy-soft); }
   .s-tag   { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: .14em; fill: var(--orange); }
   .s-line  { stroke: var(--steel); stroke-width: 1.25; fill: none; }
+  .s-line-d { stroke: var(--steel); stroke-width: 1.25; fill: none; stroke-dasharray: 5 4; }
+  .s-box-d { fill: rgba(33, 75, 108, .28); stroke: var(--steel); stroke-width: 1; stroke-dasharray: 5 4; }
+  .s-tag-m { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: .14em; fill: var(--steel); }
   .fill-s  { fill: var(--steel); }
 
   /* ---------- two lists ---------- */
@@ -156,6 +164,11 @@
     background: var(--navy-deep); border: 1px solid var(--hairline);
     border-left: 3px solid var(--steel); border-radius: 12px;
     padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .sharedrow.pipeline { border-left-color: var(--gold); }
+  .rownote {
+    font-family: var(--font-body); font-size: 12.5px; line-height: 1.45;
+    color: var(--on-navy-soft); margin: 0;
   }
   .sharednames { display: flex; flex-wrap: wrap; gap: 8px; }
   .sharednames span {
@@ -211,18 +224,19 @@
   <div class="frame">
     <div class="panel issue">
       <p class="eyebrow hot">The issue</p>
-      <p>Nothing on a document says whether a building is commercial or residential. That classification lives in people's heads, so filing by topic only works for the people who already know.</p>
+      <p class="scenario">Give a roofing invoice to someone on their first day and ask them to file it. Filing by topic means knowing whether that building is commercial or residential. Nothing on the page says, so they have to stop and ask someone who already knows.</p>
     </div>
     <div class="panel solution">
       <p class="eyebrow">The solution</p>
-      <p>The entity is printed right on the paperwork. The insurance names the insured, the note names the borrower, the invoice names the bill-to. So make ownership the organizing question, and let everything below it be forgiving.</p>
+      <p class="lead">So make ownership the organizing question, and let everything below it be forgiving.</p>
+      <p class="support">The entity is printed right on the paperwork. The insurance names the insured, the note names the borrower, the invoice names the bill-to.</p>
     </div>
   </div>
 
   <section>
-    <h2>Two roots</h2>
+    <h2>Four roots</h2>
     <figure>
-      <svg viewBox="0 0 1000 296" role="img" aria-label="Every document routes to one of two roots. If it is owned by an entity it goes to Entities, one folder per LLC with Good Harbor included. If it is shared it goes to Shared, holding vendor W9 and ACH details, templates, contacts, playbooks, training and master policies.">
+      <svg viewBox="0 0 1000 428" role="img" aria-label="Where a document goes. Any document takes one of three routes: if it is a deal not owned yet it goes to Pipeline, organized by deal because no LLC exists; if it belongs to one entity it goes to Entities; if it is shared it goes to Shared. Archive is not a filing destination. Whole folders move into it when an entity is sold or a deal dies.">
         <defs>
           <marker id="r-ar" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L9,4.5 L0,9 z" class="fill-s"></path>
@@ -233,28 +247,57 @@
         <text class="s-label" x="500" y="48" text-anchor="middle">Any document</text>
 
         <path class="s-line" d="M500,68 L500,124"></path>
-        <path class="s-line" d="M251,124 L749,124"></path>
-        <path class="s-line" d="M251,124 L251,174" marker-end="url(#r-ar)"></path>
-        <path class="s-line" d="M749,124 L749,174" marker-end="url(#r-ar)"></path>
+        <path class="s-line" d="M170,124 L830,124"></path>
+        <path class="s-line" d="M170,124 L170,174" marker-end="url(#r-ar)"></path>
+        <path class="s-line" d="M500,124 L500,174" marker-end="url(#r-ar)"></path>
+        <path class="s-line" d="M830,124 L830,174" marker-end="url(#r-ar)"></path>
 
-        <text class="s-tag" x="261" y="152">OWNED BY AN ENTITY</text>
-        <text class="s-tag" x="759" y="152">SHARED</text>
+        <text class="s-tag" x="180" y="152">NOT OWNED YET</text>
+        <text class="s-tag" x="510" y="152">OWNED BY AN ENTITY</text>
+        <text class="s-tag" x="840" y="152">SHARED</text>
 
-        <rect class="s-box" x="16" y="180" width="470" height="96" rx="10"></rect>
-        <text class="s-mono" x="40" y="212">01 - Entities/</text>
-        <text class="s-sub" x="40" y="236">One folder per LLC, Good Harbor included.</text>
-        <text class="s-sub" x="40" y="254">Everything that entity owns, properties included.</text>
+        <rect class="s-box" x="16" y="180" width="308" height="96" rx="10"></rect>
+        <text class="s-mono" x="40" y="212">01 - Pipeline/</text>
+        <text class="s-sub" x="40" y="236">Deals in diligence. Organized by deal,</text>
+        <text class="s-sub" x="40" y="254">because there is no LLC yet.</text>
 
-        <rect class="s-box" x="514" y="180" width="470" height="96" rx="10"></rect>
-        <text class="s-mono" x="538" y="212">02 - Shared/</text>
-        <text class="s-sub" x="538" y="236">Belongs to no single entity. Vendor W9 and ACH,</text>
-        <text class="s-sub" x="538" y="254">templates, contacts, playbooks, training, policies.</text>
+        <rect class="s-box" x="346" y="180" width="308" height="96" rx="10"></rect>
+        <text class="s-mono" x="370" y="212">02 - Entities/</text>
+        <text class="s-sub" x="370" y="236">One folder per LLC, Good Harbor</text>
+        <text class="s-sub" x="370" y="254">included. Six folders each.</text>
+
+        <rect class="s-box" x="676" y="180" width="308" height="96" rx="10"></rect>
+        <text class="s-mono" x="700" y="212">03 - Shared/</text>
+        <text class="s-sub" x="700" y="236">Vendor W9 and ACH, templates,</text>
+        <text class="s-sub" x="700" y="254">contacts, playbooks, training.</text>
+
+        <path class="s-line-d" d="M170,280 L170,330" marker-end="url(#r-ar)"></path>
+        <text class="s-tag-m" x="182" y="308">IF THE DEAL DIES</text>
+
+        <path class="s-line-d" d="M500,280 L500,330" marker-end="url(#r-ar)"></path>
+        <text class="s-tag-m" x="512" y="308">WHEN SOLD</text>
+
+        <rect class="s-box-d" x="16" y="336" width="968" height="76" rx="10"></rect>
+        <text class="s-mono" x="40" y="366">04 - Archive/</text>
+        <text class="s-sub" x="40" y="390">Never a filing destination. Whole folders move here, unchanged, when an entity is sold or a deal dies.</text>
       </svg>
     </figure>
   </section>
 
   <section>
     <h2>The structure</h2>
+
+    <div class="sharedrow pipeline">
+      <div class="lhead" style="padding:0">Inside any <b>pipeline deal</b></div>
+      <div class="sharednames">
+        <span>LOI &amp; PSA</span>
+        <span>Diligence</span>
+        <span>Financing</span>
+        <span>Formation</span>
+        <span>Misc</span>
+      </div>
+      <p class="rownote">At closing these become the property's Purchase folder, so the move is a copy rather than a re-sort.</p>
+    </div>
 
     <div class="twolists">
 
@@ -296,7 +339,7 @@
 
     </div>
 
-    <p class="listnote">Six folders in every LLC, the same six every time. Seven in every building. Nothing below them is enforced, so split Financials into tax years or AP however you like.</p>
+    <p class="listnote">Six folders in every LLC, the same six every time. Seven in every building. Archive holds the same six, moved whole. Nothing below them is enforced, so split Financials into tax years or AP however you like.</p>
 
     <div class="sharedrow">
       <div class="lhead" style="padding:0">Inside <b>Shared</b></div>
